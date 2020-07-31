@@ -5,19 +5,22 @@ provider "aws" {
 }
 
 
-resource "aws_iam_policy" "policy" {
-  name = "s3CW"
-
-  policy = <<POLICY
+resource "aws_iam_role" "role" {
+  name = "s3CloudWatch"
+  assume_role_policy  = <<POLICY
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": ["*"],
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": ["s3.amazonaws.com","cloudwatch.amazonaws.com"]
+      },
       "Effect": "Allow",
-      "Resource": ["arn:aws:s3:::*","arn:aws:cloudwatch:::*"]
+      "Sid": ""
     }
   ]
 }
   POLICY
 }
+
