@@ -19,3 +19,14 @@ client.put_item(
         }
     },
 )
+
+response = client.get_item(
+    TableName='employees',
+    Key={
+        'id': {
+            'N': '1',
+        }
+    },
+)
+
+print(response)

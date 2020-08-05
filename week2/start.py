@@ -1,14 +1,5 @@
-import boto3
+import datetime
 
-client = boto3.client('dynamodb')
+def date_conv():
+    return datetime.date.today().__format__("%d/%m/%Y")
 
-response = client.get_item(
-    TableName='employees',
-    Key={
-        'id': {
-            'N': '1',
-        }
-    },
-)
-
-print(response)
