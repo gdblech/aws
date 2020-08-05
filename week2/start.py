@@ -1,5 +1,17 @@
-import datetime
+import boto3
+client = boto3.client("lambda")
 
-def date_conv():
-    return datetime.date.today().__format__("%d/%m/%Y")
+response1 = client.invoke(
+    FunctionName='timeFunc',
+    InvocationType='RequestResponse',
+)
+
+print(response1)
+
+response2 = client.invoke(
+    FunctionName='dynamodbFunc',
+    InvocationType='DryRun',
+)
+
+print(response2)
 

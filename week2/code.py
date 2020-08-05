@@ -22,14 +22,14 @@ def lambda_handler(event, context):
     logger.info('## GLUE JOB RUN ID: ' + response['JobRunId'])
     return response
 
-def query_emp_age(age):
+def query_emp_age(event, context):
     table = dynamodb.Table('employees')
     response = table.query(
-        KeyConditionExpression=Key('age').exists()
+        KeyConditionExpression=Key('*').exists()
     )
     return response
 
 import datetime
 
-def date_conv():
+def date_conv(event, context):
     return datetime.date.today().__format__("%d/%m/%Y")
